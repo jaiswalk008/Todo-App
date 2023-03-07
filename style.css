@@ -1,0 +1,16 @@
+.container{
+   
+    width: 60% !important;
+    min-width: 500px;
+}
+
+.header{
+    height: 60px;
+    background-color: rgb(154 118 227);
+    text-align:center;
+    color:black;
+    font-size: 40px;
+    border-radius: 3px;
+    border:2px solid black;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}

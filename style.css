@@ -3,7 +3,9 @@
     width: 60% !important;
     min-width: 500px;
 }
-
+.error{
+    color:rgb(223, 39, 6)
+}
 .header{
     height: 60px;
     background-color: rgb(154 118 227);
@@ -13,4 +15,13 @@
     border-radius: 3px;
     border:2px solid black;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+label{
+    font-weight:600;
+    font-size:20px
+}
+#save{
+    background-color:rgb(125, 95, 185) !important;
+    color:white;
+    border: 1px solid black;
 }

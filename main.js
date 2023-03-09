@@ -23,7 +23,8 @@ function addTask(e){
     newDiv.appendChild(des);
     let container= document.getElementById('task-list');
     container.appendChild(newDiv);
-    add.setAttribute('data-ds-toggle')
+    add.setAttribute('data-bs-dismiss','modal');
+    add.click();
 
 
 }

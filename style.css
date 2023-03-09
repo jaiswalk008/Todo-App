@@ -1,4 +1,4 @@
-.container{
+.box{
    
     width: 60% !important;
     min-width: 500px;
@@ -26,4 +26,16 @@ label{
     background-color:rgb(125, 95, 185) !important;
     color:white;
     border: 1px solid black;
+}
+#task-list{
+    background-color:rgb(120, 90, 185) ;
+    padding: .1px;
+    border-radius: 5px;
+}
+.task{
+    background-color:rgb(165, 139, 221) ;
+    margin: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 8px;
 }

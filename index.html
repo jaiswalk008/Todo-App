@@ -22,11 +22,11 @@
                           <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Add New Task</h5>
                           </div>
-                          <form id="my-form" >
+                          <form id="my-form" novalidate>
                               <div class="modal-body">
                                 
                                 <label for="title" class="form-label">Task Title</label>
-                                <input type="text" name="title" id="title" class="form-control">
+                                <input type="text" name="title" id="title" class="form-control" required>
                                 <span id="msg"></span>
                                 <label for="date" class="form-label mt-2 ">Due Date</label>
                                 <input type="date" name="date" id="date" class="form-control">

@@ -1,13 +1,20 @@
 const form =document.getElementById('my-form');
 const add = document.getElementById('save');
 console.log(document.getElementById('title').innerText)
+let title_text=document.getElementById('title').value;
 form.addEventListener('submit',addTask);
 function addTask(e){
     e.preventDefault()
+    if(title_text.length <1){
+        let msg = document.getElementById('msg');
+        msg.className='error';
+        msg.appendChild(document.createTextNode('Please enter the task title'));
+        
+    }
     let newDiv = document.createElement('div');
     newDiv.className='task';
     let title = document.createElement('h4');
-    title.appendChild(document.createTextNode(document.getElementById('title').value));
+    title.appendChild(document.createTextNode(title_text));
    // console.log(document.getElementById('title').value)
     let date = document.createElement('span');
     let mL = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];

@@ -1,72 +1,100 @@
 const form =document.getElementById('my-form');
 const add = document.getElementById('save');
-
+let task_counter=0;
+let taskList=[]
+function showDateError(){
+    let datemsg = document.getElementById('date-msg');
+    datemsg.className='error';
+    let errorMsg = 'Please choose a date!';
+    datemsg.innerHTML = errorMsg;
+    setTimeout(function(){
+        datemsg.innerHTML = '';
+    },3000);
+}
 form.addEventListener('submit',addTask);
 function addTask(e){
     e.preventDefault()
     let title_text=document.getElementById('title');
     let date_value = document.getElementById('date').value;
     //form validation
-    if(title_text.value.length <1){
+    if(title_text.value===''){
         let titlemsg = document.getElementById('title-msg');
         titlemsg.className='error';
         let errorMsg = 'Please enter the task title!';
         titlemsg.innerHTML = errorMsg;
         setTimeout(function(){
             titlemsg.innerHTML = '';
-        },2500);
-        if(date_value===''){
-            let datemsg = document.getElementById('date-msg');
-            datemsg.className='error';
-            let dateErrorMsg = 'Please choose a date!';
-            datemsg.innerHTML = dateErrorMsg;
-            setTimeout(function(){
-                datemsg.innerHTML = '';
-            },2500);
-        }
-        
-        
+        },3000);
+        if(date_value==='') showDateError();
     }
     
-    else if(date_value===''){
-        let datemsg = document.getElementById('date-msg');
-        datemsg.className='error';
-        let errorMsg = 'Please choose a date!';
-        datemsg.innerHTML = errorMsg;
-        setTimeout(function(){
-            datemsg.innerHTML = '';
-        },2500);
+    else if(date_value==='') showDateError();
+
+    else{
+        
+        //adding task details
+        let newTask={
+            taskTitle:title_text.value,
+            taskDate:date_value,
+            taskDescription: document.getElementById('info').value
+        };
+        taskList.push(newTask);
+        //adding task in local storage
+        localStorage.setItem(title_text.value, JSON.stringify(newTask))
+
+        //resetting form values
+        form.reset()
+        document.getElementById('close').click();
+        showTask();
         
     }
-    else{
-        let newDiv = document.createElement('div');
-        newDiv.className='task';
-        
+}
+
+if(localStorage.length>0) showTask();
+function showTask(){
+    console.log(taskList);
+    let tasks=[];
+    document.getElementById('task-list').style.backgroundColor ='rgb(115, 92, 168)';
+    console.log(task_counter + ' '+localStorage.length);
+    for(let i=0;i<localStorage.length;i++){
+
+        let obj =JSON.parse(localStorage.getItem(localStorage.key(i)));
+        tasks.push(obj);
+      //  task_counter++;
+    }
+    console.log(tasks);
+    
+    for(let i=task_counter;i<localStorage.length;i++){
+        task_counter++; 
+        console.log(i+' '+task_counter + ' '+localStorage.length)
+        let obj =JSON.parse(localStorage.getItem(localStorage.key(i)));
+        let task_title =obj.taskTitle;
         //adding title
         let title = document.createElement('h4');
-        title.appendChild(document.createTextNode(title_text.value));
+        title.appendChild(document.createTextNode(task_title));
 
-        //adding date
-        let date = document.createElement('span');
-        let mL = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-        let d=new Date(document.getElementById('date').value)
-        var NoTimeDate = d.getDate()+'-'+mL[(d.getMonth())]+' '+d.getFullYear(); 
-   
-        date.appendChild(document.createTextNode(NoTimeDate));
-        date.appendChild(document.createElement('br'))
+        let task_date = obj.taskDate;
+         //adding date
+         let date = document.createElement('span');
+         let mL = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+         let d=new Date(task_date);
+         var NoTimeDate = d.getDate()+'-'+mL[(d.getMonth())]+' '+d.getFullYear(); 
+    
+         date.appendChild(document.createTextNode(NoTimeDate));
+         date.appendChild(document.createElement('br'))
 
-        //adding description
-
-        let des = document.createElement('span');
+         let task_description =obj.taskDescription;
+         let des = document.createElement('span');
         des.setAttribute('id','desc')
-        des.appendChild(document.createTextNode(document.getElementById('info').value));
+        des.appendChild(document.createTextNode(task_description));
+        let newDiv = document.createElement('div');
+        newDiv.className='task';
         newDiv.appendChild(title);
         newDiv.appendChild(date);
         newDiv.appendChild(des);
         //inserting the div element in the task list container
         let container= document.getElementById('task-list');
         container.appendChild(newDiv);
-
         //new div for icons
         let iconDiv = document.createElement('div');
         iconDiv.className='div-icon';
@@ -89,19 +117,5 @@ function addTask(e){
         deletebtn.appendChild(deleteIcon);
         iconDiv.appendChild(deletebtn);
         newDiv.appendChild(iconDiv);
-
-        //setting attribute to close the modal
-        add.setAttribute('data-bs-dismiss','modal');
-        add.click();
-
-        //resetting form values
-        //title field reset
-        title_text.value=''; 
-        //date reset   
-        document.getElementById('date').value='';
-        //description reset
-        document.getElementById('info').value='';
     }
-
-
 }

@@ -1,7 +1,8 @@
 const form =document.getElementById('my-form');
 const add = document.getElementById('save');
-let task_counter=0;
-let taskList=[]
+let task_counter=localStorage.length;
+let tasks=[]
+let ct=0;
 function showDateError(){
     let datemsg = document.getElementById('date-msg');
     datemsg.className='error';
@@ -32,48 +33,41 @@ function addTask(e){
 
     else{
         
-        //adding task details
+        //adding task details   
         let newTask={
             taskTitle:title_text.value,
             taskDate:date_value,
             taskDescription: document.getElementById('info').value
         };
-        taskList.push(newTask);
+        
         //adding task in local storage
-        localStorage.setItem(title_text.value, JSON.stringify(newTask))
-
+        localStorage.setItem(''+task_counter, JSON.stringify(newTask))
+        task_counter++;
         //resetting form values
         form.reset()
         document.getElementById('close').click();
         showTask();
-        
     }
 }
 
-if(localStorage.length>0) showTask();
+if(localStorage.length) showTask();
 function showTask(){
-    console.log(taskList);
-    let tasks=[];
     document.getElementById('task-list').style.backgroundColor ='rgb(115, 92, 168)';
-    console.log(task_counter + ' '+localStorage.length);
-    for(let i=0;i<localStorage.length;i++){
-
-        let obj =JSON.parse(localStorage.getItem(localStorage.key(i)));
+    //retrieving data from local storage
+    for(let i=ct;i<localStorage.length;i++){
+        let obj =(localStorage.getItem(i));
         tasks.push(obj);
-      //  task_counter++;
-    }
-    console.log(tasks);
-    
-    for(let i=task_counter;i<localStorage.length;i++){
-        task_counter++; 
-        console.log(i+' '+task_counter + ' '+localStorage.length)
-        let obj =JSON.parse(localStorage.getItem(localStorage.key(i)));
-        let task_title =obj.taskTitle;
+        ct++;
+        let objDetails = JSON.parse(tasks[i]);
+        console.log(objDetails)
         //adding title
+        let task_title =objDetails.taskTitle;
+
+        
         let title = document.createElement('h4');
         title.appendChild(document.createTextNode(task_title));
 
-        let task_date = obj.taskDate;
+        let task_date = objDetails.taskDate;
          //adding date
          let date = document.createElement('span');
          let mL = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -83,7 +77,7 @@ function showTask(){
          date.appendChild(document.createTextNode(NoTimeDate));
          date.appendChild(document.createElement('br'))
 
-         let task_description =obj.taskDescription;
+         let task_description =objDetails.taskDescription;
          let des = document.createElement('span');
         des.setAttribute('id','desc')
         des.appendChild(document.createTextNode(task_description));

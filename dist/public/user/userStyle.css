@@ -1,0 +1,25 @@
+.container,.container-fluid{
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 450px;
+    margin: 10px;    
+}
+.form-control:focus {
+    border-color: rgb(206, 194, 233) !important;
+    box-shadow: 0 0 0 0.25rem rgb(206, 194, 233) !important;
+}
+.btn{
+    background-color: rgb(153, 129, 202);
+    border: 2px solid black;
+    font-weight: 500;
+}
+.btn:hover{
+    background-color: rgb(121, 102, 161);
+}
+.message-alert{
+    text-align: center;
+    color: rgb(121, 102, 161);
+    text-decoration: underline;
+    font-weight: 600;
+    display: none;
+}

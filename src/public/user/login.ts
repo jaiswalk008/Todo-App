@@ -13,8 +13,8 @@ async function login(e:any){
         const res = await axios.post('http://localhost:3000/user/login/',userDetails);
         console.log(res.data);
         localStorage.setItem('token',res.data.token);
-        // window.location.replace('login.html')
-        alert('logged in succesfully');
+        window.location.replace('/todo/index.html');
+        // alert('logged in succesfully');
     }
     catch(err:any){
         const messageDisplay = document.querySelector('.message-alert') as HTMLParagraphElement;

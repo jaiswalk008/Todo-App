@@ -18,12 +18,14 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const user_1 = __importDefault(require("./Routes/user"));
+const todos_1 = __importDefault(require("./Routes/todos"));
 dotenv_1.default.config();
 const server = (0, express_1.default)();
 server.use((0, cors_1.default)());
 const path_1 = __importDefault(require("path"));
 server.use(body_parser_1.default.json());
 server.use('/user', user_1.default);
+server.use(todos_1.default);
 server.use((req, res) => {
     res.sendFile(path_1.default.join(__dirname, `/public${req.url}`));
 });

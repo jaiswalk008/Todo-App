@@ -22,8 +22,8 @@ function login(e) {
             const res = yield axios.post('http://localhost:3000/user/login/', userDetails);
             console.log(res.data);
             localStorage.setItem('token', res.data.token);
-            // window.location.replace('login.html')
-            alert('logged in succesfully');
+            window.location.replace('/todo/index.html');
+            // alert('logged in succesfully');
         }
         catch (err) {
             const messageDisplay = document.querySelector('.message-alert');

@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getTodos = exports.addTodo = void 0;
+exports.updateTodo = exports.deleteTodo = exports.getTodos = exports.addTodo = void 0;
 const todo_1 = __importDefault(require("../Models/todo"));
 // import User from '../Models/user';
 const addTodo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -33,7 +33,7 @@ const getTodos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // console.log(req.user._id);
         const todos = yield todo_1.default.find({ userId: req.user._id }).select('-userId');
-        console.log(todos);
+        // console.log(todos);
         res.status(201).json(todos);
     }
     catch (err) {
@@ -41,3 +41,27 @@ const getTodos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.getTodos = getTodos;
+const deleteTodo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const todoId = req.query.id;
+    console.log(todoId);
+    try {
+        yield todo_1.default.findOneAndDelete({ _id: todoId });
+        res.status(201).json({ "message": "todo deleted" });
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+exports.deleteTodo = deleteTodo;
+const updateTodo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const todoId = req.query.id;
+    try {
+        yield todo_1.default.findOneAndUpdate({ _id: todoId }, { completed: true });
+        console.log('updated');
+        res.status(201).json({ message: "todo marked as completed" });
+    }
+    catch (err) {
+        console.log(err);
+    }
+});
+exports.updateTodo = updateTodo;

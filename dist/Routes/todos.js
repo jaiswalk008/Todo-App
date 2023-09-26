@@ -32,4 +32,6 @@ const auth_1 = __importDefault(require("../middleware/auth"));
 const router = (0, express_1.Router)();
 router.get('/getTodos', auth_1.default, todosController.getTodos);
 router.post('/addTodo', auth_1.default, todosController.addTodo);
+router.delete('/delete', todosController.deleteTodo);
+router.post('/update', todosController.updateTodo);
 exports.default = router;

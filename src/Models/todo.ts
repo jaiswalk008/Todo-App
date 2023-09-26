@@ -17,6 +17,10 @@ const todoSchema = new Schema({
     userId:{
         type:ObjectId,
         ref:user
+    },
+    completed:{
+        type:Boolean,
+        default:false
     }
 })
 export default mongoose.model('Todo',todoSchema);

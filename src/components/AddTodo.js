@@ -1,16 +1,23 @@
-import { useRef } from "react";
+'use client'
+import { useEffect, useRef, useState } from "react";
 
 const AddTodo = ({onSubmitHandler}) =>{
     
-  const titleRef = useRef('');
+  const [title,setTitle] = useState('');
   const dateRef = useRef('');
   const descriptionRef = useRef('');
+  useEffect(()=>{
+    console.log(title);
+
+  },[title]);
   const formSubmitHandler = (e) =>{
+    console.log('helo') 
     e.preventDefault();
-    const title = titleRef.current.value
+
     const date = dateRef.current.value
     const description = descriptionRef.current.value
     const todo = {title,date,description};
+    console.log(todo);
     onSubmitHandler(todo);
   }
 
@@ -28,7 +35,7 @@ const AddTodo = ({onSubmitHandler}) =>{
                   <form onSubmit={formSubmitHandler}>
                       <div className="modal-body">
                         <label htmlFor="title" className="form-label">Task Title</label>
-                        <input type="text" ref={titleRef} name="title" id="title" className="form-control" required/>
+                        <input type="text"value={title} onChange={(e) => setTitle(e.target.value)} name="title" id="title" className="form-control" required/>
                         <label htmlFor="date" className="form-label mt-2 ">Due Date</label> 
                         <input type="date" ref={dateRef} name="date" id="date" className="form-control" placeholder="dd-mon-year" required  />
                         <label htmlFor="info" className="form-label mt-2">Description</label>
@@ -37,7 +44,7 @@ const AddTodo = ({onSubmitHandler}) =>{
                       </div>
                       <div className="modal-footer">
                         <button type="button" id="close" className="btn btn-dark" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" id="save" onClick={() => document.getElementById('close').click()} className="btn">Save</button>
+                        <button type="button" className="btn btn-primary" id="save" >Save</button>
                       </div>
                   </form>
                   

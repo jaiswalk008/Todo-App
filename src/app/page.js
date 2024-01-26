@@ -1,15 +1,26 @@
+'use client'
 import AddTodo from "@/components/AddTodo";
 import { useState } from "react";
 import TodoList from "@/components/TodoList";
 
-const HomePage= () =>{
+const Home= () =>{
   const [todos, setTodos] = useState([]);
-  const addToList = (todo) =>{
+  const addToList =async (todo) =>{
+    // console.log(updatedTodos);
+    console.log(todo);
+    // try {
+    //   const res = await axios.post('http:localhost:3000/todos',todo);
+    //   console.log(res.data);
+      
+      
+    // } catch (error) {
+    //   console.log(error);
+    // }
     const updatedTodos = [...todos, todo];
-    console.log(updatedTodos);
+
     setTodos(updatedTodos);
   }
- 
+  console.log('hello')
   return (
     <>
       <AddTodo onSubmitHandler = {addToList}/>
@@ -18,4 +29,4 @@ const HomePage= () =>{
     </>
   )
 }
-export default HomePage;
+export default Home;

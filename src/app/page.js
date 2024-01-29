@@ -1,32 +1,18 @@
-'use client'
-import AddTodo from "@/components/AddTodo";
-import { useState } from "react";
-import TodoList from "@/components/TodoList";
+import Home from "./Home";
 
-const Home= () =>{
-  const [todos, setTodos] = useState([]);
-  const addToList =async (todo) =>{
-    // console.log(updatedTodos);
-    console.log(todo);
-    // try {
-    //   const res = await axios.post('http:localhost:3000/todos',todo);
-    //   console.log(res.data);
-      
-      
-    // } catch (error) {
-    //   console.log(error);
-    // }
-    const updatedTodos = [...todos, todo];
-
-    setTodos(updatedTodos);
+const fetchTodos =async ()=>{
+  try{
+    const response = await fetch('http://localhost:3000/todos');
+    const data = await response.json();
+    console.log(data);
+    return data;
   }
-  console.log('hello')
-  return (
-    <>
-      <AddTodo onSubmitHandler = {addToList}/>
-      <div className="d-flex justify-content-center fw-bold fs-3">Tasks </div><hr/>
-      <TodoList todos={todos}/>
-    </>
-  )
+  catch(err){
+      console.log(err);
+  }
 }
-export default Home;
+async function HomePage(){
+    const data = await fetchTodos();
+    return <Home todos={data}/>
+}
+export default HomePage;

@@ -6,14 +6,10 @@ const AddTodo = ({onSubmitHandler}) =>{
   const [title,setTitle] = useState('');
   const dateRef = useRef('');
   const descriptionRef = useRef('');
-  useEffect(()=>{
-    console.log(title);
-
-  },[title]);
+ 
   const formSubmitHandler = (e) =>{
-    console.log('helo') 
     e.preventDefault();
-
+    
     const date = dateRef.current.value
     const description = descriptionRef.current.value
     const todo = {title,date,description};
@@ -44,7 +40,7 @@ const AddTodo = ({onSubmitHandler}) =>{
                       </div>
                       <div className="modal-footer">
                         <button type="button" id="close" className="btn btn-dark" data-bs-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-primary" id="save" >Save</button>
+                        <button type="submit" className="btn btn-primary" id="save" >Save</button>
                       </div>
                   </form>
                   

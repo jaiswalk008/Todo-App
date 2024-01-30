@@ -38,3 +38,18 @@ export async function GET(){
         console.log(err)
     }
 }
+export async function PATCH(req,{params}){
+   const searchParams =req.nextUrl.searchParams;
+   const id = searchParams.get('id');
+//    console.log(id)
+   try{
+    await connectToDatabase();
+   
+    await todo.findByIdAndUpdate(id,{completed:true});
+    
+    return NextResponse.json({completed:true});
+   }
+   catch(err){
+    console.log(err);
+   }
+}

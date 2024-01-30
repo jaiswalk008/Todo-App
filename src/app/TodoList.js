@@ -1,5 +1,8 @@
 'use client'
-const TodoList = ({todos}) =>{
+
+const TodoList = ({todos ,onMarkTodo}) =>{
+
+    
 
     return (
         <>
@@ -10,6 +13,9 @@ const TodoList = ({todos}) =>{
                         <h4 style={{color:"black"}}>{todo.title}</h4>
                         <section>{todo.date}</section>
                         <p>{todo.description}</p>
+                        <div>
+                        {onMarkTodo && <i onClick={() => onMarkTodo(todo._id)} className="bi bi-check"></i>}
+                        </div>
                     </div>)
                 })}
                 

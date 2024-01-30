@@ -99,3 +99,6 @@ body{
     font-weight: 400;
     font-size: 125%;
   }
+  .bi-check:hover{
+      cursor: pointer   ;
+  }

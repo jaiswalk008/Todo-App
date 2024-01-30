@@ -1,15 +1,15 @@
 'use client'
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 
 const AddTodo = ({onSubmitHandler}) =>{
     
-  const [title,setTitle] = useState('');
+  const titleRef = useRef('');
   const dateRef = useRef('');
   const descriptionRef = useRef('');
  
   const formSubmitHandler = (e) =>{
     e.preventDefault();
-    
+    const title = titleRef.current.value;
     const date = dateRef.current.value
     const description = descriptionRef.current.value
     const todo = {title,date,description};
@@ -31,7 +31,7 @@ const AddTodo = ({onSubmitHandler}) =>{
                   <form onSubmit={formSubmitHandler}>
                       <div className="modal-body">
                         <label htmlFor="title" className="form-label">Task Title</label>
-                        <input type="text"value={title} onChange={(e) => setTitle(e.target.value)} name="title" id="title" className="form-control" required/>
+                        <input type="text" ref={titleRef} name="title" id="title" className="form-control" required/>
                         <label htmlFor="date" className="form-label mt-2 ">Due Date</label> 
                         <input type="date" ref={dateRef} name="date" id="date" className="form-control" placeholder="dd-mon-year" required  />
                         <label htmlFor="info" className="form-label mt-2">Description</label>

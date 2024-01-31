@@ -14,13 +14,13 @@ const Home= (props) =>{
       })
       const data = await response.json()
       console.log(data);
+      const updatedTodos = [...todos, data];
+      setTodos(updatedTodos);
       
     } catch (error) {
       console.log(error);
     }
-    const updatedTodos = [...todos, res.data];
     // console.log(updatedTodos);
-    setTodos(updatedTodos);
   }
   const markTodoAsCompleted = useCallback(async (id)=>{
     try{
@@ -34,7 +34,7 @@ const Home= (props) =>{
     catch(err){
         console.log(err);
     }
-  },[])
+  },[todos])
   return (
     <>
       <AddTodo onSubmitHandler = {addToList}/>

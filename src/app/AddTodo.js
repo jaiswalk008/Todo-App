@@ -15,6 +15,7 @@ const AddTodo = ({onSubmitHandler}) =>{
     const todo = {title,date,description};
     console.log(todo);
     onSubmitHandler(todo);
+    document.getElementById('close').click();
   }
 
     return (

@@ -53,3 +53,17 @@ export async function PATCH(req,{params}){
     console.log(err);
    }
 }
+
+export async function DELETE(req){
+    const searchParams = req.nextUrl.searchParams;
+    const id = searchParams.get('id');
+    console.log(id);
+    try {
+        await connectToDatabase();
+        await todo.findByIdAndDelete(id);
+    return NextResponse.json({success:true});
+
+    } catch (error) {
+        console.log(error);
+    }
+}

@@ -1,8 +1,6 @@
 'use client'
 
-const TodoList = ({todos ,onMarkTodo}) =>{
-
-    
+const TodoList = ({todos ,onMarkTodo ,onDeleteTodo}) =>{
 
     return (
         <>
@@ -15,7 +13,7 @@ const TodoList = ({todos ,onMarkTodo}) =>{
                         <p>{todo.description}</p>
                         {onMarkTodo && <div className="float-end">
                         <i onClick={() => onMarkTodo(todo._id)} className="bi bi-check"></i>
-                        <i className="bi me-2 bi-trash"></i>
+                        <i onClick={() => onDeleteTodo(todo._id)} className="bi me-2 bi-trash"></i>
                        
                         </div>}
                     </div>)
